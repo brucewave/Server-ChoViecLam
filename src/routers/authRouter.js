@@ -1,6 +1,7 @@
 /** @format */
 
 const Router = require('express');
+const { register } = require('../controllers/authController');
 // const {
 // 	register,
 // 	login,
@@ -11,11 +12,7 @@ const Router = require('express');
 
 const authRouter = Router();
 
-authRouter.post('/register', (req, res) => {
-    console.log(req.body);
-    res.send("Register");
-
-});
+authRouter.post('/register', register);
 
 // authRouter.post('/register', register);
 // authRouter.post('/login', login);
