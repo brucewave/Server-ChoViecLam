@@ -1,52 +1,33 @@
-/** @format */
-
-const { default: mongoose, isValidObjectId, Schema } = require('mongoose');
+const { default: mongoose} = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-	name: {
-		type: String,
-	},
-	givenName: {
-		type: String,
-	},
-	familyName: {
-		type: String,
-	},
-	bio: {
+	fullname: {
 		type: String,
 	},
 	email: {
 		type: String,
-		require: true,
+		required: true,
 	},
 	password: {
 		type: String,
-		require: true,
+		required: true,
 	},
-	photoUrl: {
+	phone: {
+		type: String,
+	},
+	address: {
 		type: String,
 	},
 	createdAt: {
 		type: Date,
-		default: Date.now(),
+		default: Date.now,
 	},
 	updatedAt: {
 		type: Date,
-		default: Date.now(),
-	},
-	fcmTokens: {
-		type: [String],
-	},
-	following: {
-		type: [String],
-	},
-	followers: {
-		type: [String],
-	},
-	interests: {
-		type: [String],
+		default: Date.now,
 	},
 });
 
 const UserModel = mongoose.model('users', UserSchema);
+
 module.exports = UserModel;
