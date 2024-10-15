@@ -21,6 +21,24 @@ const getJsonWebToken = async (email, id) => {
 	return token;
 }
 
+
+const handleSendEmail = async (val) => {
+	const transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+			user: process.env.EMAIL_USER,
+			pass: process.env.EMAIL_PASS,
+		},
+	});
+}
+
+const verification = asyncHandle(async (req, res) => {	
+	const {email} = req.body;
+	console.log(email);
+	res.send('ok');
+})
+
+
 const register = asyncHandle(async (req, res) => {
 	const {email, fullname, password} = req.body;
 
@@ -85,4 +103,5 @@ const login = asyncHandle(async (req, res) => {
 module.exports = {
 	register,
 	login,
+	verification,
 };
