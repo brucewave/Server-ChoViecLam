@@ -130,10 +130,47 @@ const login = asyncHandle(async (req, res) => {
 	});
 });
 
+const forgotPassword = asyncHandle(async (req, res) => {
+	const {email} = req.body;
 
+	const randomPassword = Math.round(1000 + Math.random() * 999000);
+	
+	const data = {
+		from: `"Support ChoViecLam Appplication" <${process.env.USERNAME_EMAIL}>`,
+		to: email,
+		subject: 'ChoViecLam - Mật Khẩu Mới',
+		text: 'Mật khẩu mới của bạn là:',
+		html: `<h1>${randomPassword}</h1>`,
+	};
+
+
+	const user = await userModel.findOne({email});
+	if(user){
+		const salt = await bcrypt.genSalt(10);
+		const hashedPassword = await bcrypt.hash(`${randomPassword}`, salt);
+		await userModel.findByIdAndUpdate(user._id, {
+			password: hashedPassword,
+			isChangePassword: true,
+		});
+		await handleSendMail(data).then(()=>{
+			res.status(200).json({
+				message: 'Gửi mật khẩu mới thành công',
+				data: []
+			});
+		}).catch((error)=>{
+			res.status(401);
+			throw new Error('Không thể gửi email');
+		});
+	}else{
+		res.status(401);
+		throw new Error('Tài khoản không tồn tại');
+	}
+
+});
 
 module.exports = {
 	register,
 	login,
 	verification,
+	forgotPassword,
 };
