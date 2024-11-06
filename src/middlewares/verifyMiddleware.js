@@ -39,6 +39,7 @@ const verifyToken = asyncHandle((req, res, next) => {
 	} else {
 		try {
 			const verify = jwt.verify(token, process.env.SECRET_KEY);
+			req.user = verify;
 			if (verify) {
 				next();
 			}
