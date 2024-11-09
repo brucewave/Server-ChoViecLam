@@ -6,6 +6,7 @@ const userRouter = require('./src/routers/userRouter');
 const verifyToken = require('./src/middlewares/verifyMiddleware');
 const connectDB = require('./src/configs/connectDb');
 const errorMiddleHandle = require('./src/middlewares/errorMiddleware');
+const uploadRouter = require('./src/controllers/uploadRouter');
 const app = express();
 require('dotenv').config();
 
@@ -24,6 +25,8 @@ app.use('/auth', authRouter);
 app.use('/users', verifyToken, userRouter);
 // app.use('/users', verifyToken, userRouter);
 // app.use('/events', verifyToken, eventRouter);
+// app.use('/upload', uploadRouter);
+app.use('/upload', uploadRouter);
 
 connectDB();
 
