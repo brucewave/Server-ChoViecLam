@@ -24,7 +24,7 @@ const PORT = 3001;
 app.use('/auth', authRouter);
 
 app.use('/users', verifyToken, userRouter);
-app.use('/jobs', verifyToken, jobRouter);
+app.use('/jobs', jobRouter);
 // app.use('/users', verifyToken, userRouter);
 // app.use('/events', verifyToken, eventRouter);
 // app.use('/upload', uploadRouter);

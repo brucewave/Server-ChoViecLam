@@ -126,6 +126,9 @@ const login = asyncHandle(async (req, res) => {
 			email: existingUser.email,
 			id: existingUser.id,
 			accesstoken: await getJsonWebToken(email, existingUser.id),
+			photo: existingUser.photoUrl ?? '',
+			name: existingUser.name ?? ''
+
 		},
 	});
 });

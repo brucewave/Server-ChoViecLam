@@ -66,6 +66,9 @@ const JobSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
+	followers: {
+		type: [String],
+	},
 });
 
 const JobModel = mongoose.model('jobs', JobSchema);
