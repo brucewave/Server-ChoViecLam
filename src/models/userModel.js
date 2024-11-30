@@ -1,30 +1,48 @@
 const { default: mongoose} = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-	fullname: {
+	name: {
+		type: String,
+	},
+	givenName: {
+		type: String,
+	},
+	familyName: {
+		type: String,
+	},
+	bio: {
 		type: String,
 	},
 	email: {
 		type: String,
-		required: true,
+		require: true,
 	},
 	password: {
 		type: String,
-		required: true,
+		require: true,
 	},
-	phone: {
-		type: String,
-	},
-	address: {
+	photoUrl: {
 		type: String,
 	},
 	createdAt: {
 		type: Date,
-		default: Date.now,
+		default: Date.now(),
 	},
 	updatedAt: {
 		type: Date,
-		default: Date.now,
+		default: Date.now(),
+	},
+	fcmTokens: {
+		type: [String],
+	},
+	following: {
+		type: [String],
+	},
+	followers: {
+		type: [String],
+	},
+	interests: {
+		type: [String],
 	},
 });
 
